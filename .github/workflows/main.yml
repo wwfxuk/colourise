@@ -48,7 +48,8 @@ jobs:
     - name: Shotgun Log
       run: |
         cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
-        TERM=rxvt-16color cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+        export TERM=xterm+256color
+        cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
     - name: Katana
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
