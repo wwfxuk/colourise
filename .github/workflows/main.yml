@@ -18,3 +18,7 @@ jobs:
         ls -l -h
         test -x ./colourise
         test -x ./colour-test
+    - name: Show --help
+      run: |
+        ./colourise --help
+        ./colour-test --help

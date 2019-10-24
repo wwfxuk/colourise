@@ -131,10 +131,10 @@ else
   for ARG in "$@"
   do
     case "${ARG}" in
-      # --help)
-      #   help
-      #   return 0
-      # ;;
+      --help)
+        echo-help
+        exit
+      ;;
       -1|--retro) retro;;
       -2|--combo) combo;;
       -3|--pretty) pretty;;
