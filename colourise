@@ -1,0 +1,136 @@
+#!/bin/bash
+set -euf -o pipefail
+
+
+function print-help() {
+    cat << EOF
+
+Usage: colourise [--shotgun-log|--katana]
+
+Colourise stdin using a specific parser.
+
+Options:
+    --shotgun-log       Colourise using parser for shotgun logs.
+    --katana            Colourise using parser for Katana stderr.
+
+
+Examples:
+
+    Colourise continuously a Shotgun log file:
+
+        tail -F ~/.shotgun/logs/tk-desktop.log | colourise --shotgun-log
+
+    Colourise continuously a Katana process, combining stdout and stderr
+    before piping into to colourise:
+
+        katana |& colourise --katana
+
+EOF
+}
+
+# "Global" variables
+START=''
+LINE=''
+END=''
+PARSER='echo-line'
+
+
+function echo-line() {
+    # Will actually read from "global" variables
+    echo -e -n "${START}"
+    echo -n "${LINE}"
+    echo -e "${END}"
+}
+
+
+function shotgun-log() {
+    allOFF='\e[0m'
+    red_bg='\e[41m'
+    yellow_fg='\e[33m'
+    grey_fg='\e[90m'
+
+    # Will actually modify "global" variables
+    # START="${allOFF}"
+    END="${allOFF}"
+
+    case "${LINE}" in
+        *' WARN '*)
+            START="${yellow_fg}"
+            ;;
+        *' ERROR '*|*' CRITICAL '*|*' FATAL '*)
+            START="${red_bg}"
+            ;;
+        *' DEBUG '*)
+            START="${grey_fg}"
+            ;;
+        *' INFO '*)
+            START="${allOFF}"
+            ;;
+    esac
+    echo-line
+}
+
+
+function katana() {
+    allOFF='\e[0m'
+    red_bg='\e[41m'
+    yellow_fg='\e[33m'
+    blue_fg='\e[34m'
+    grey_fg='\e[90m'
+
+    shopt -s nocasematch
+    END="${allOFF}"
+
+    case "${LINE}" in
+        *warn*)
+            START="${yellow_fg}"
+            ;;
+        *ERROR*|*CRITICAL*|*FATAL*)
+            START="${red_bg}"
+            ;;
+        '[DEBUG'*)
+            START="${grey_fg}"  # Python logging specific colouring
+            ;;
+        '[INFO'*)
+            START="${blue_fg}"  # Python logging specific colouring
+            ;;
+        *)
+            START="${allOFF}"
+            ;;
+    esac
+    echo-line
+}
+
+
+if [ -t 1 ]
+then
+    # Colourise if stdout is terminal
+    for ARG in "${@}"
+    do
+        case "${ARG}" in
+            --help)
+                print-help
+                exit
+                ;;
+            --?*)  # 1 or more characters after --
+                PARSER_NAME="${ARG#--}"
+
+                # PATH=  to prevent it picking up external binaries
+                PATH= command -v "${PARSER_NAME}" && {
+                    PARSER="${PARSER_NAME}"
+                    break
+                } || echo "Parser function not found: '${PARSER_NAME}'"
+                shift
+                ;;
+        esac
+    done
+else
+    echo 'output not a terminal, just using echo-line'
+fi
+
+# IFS=      Prevent stripping leading whitespace
+# read -r   Don't escape incoming backslash printed into piped-in stdout
+while IFS= read -r LINE
+do
+    "${PARSER}" "${LINE}"
+done
