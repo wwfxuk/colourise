@@ -13,12 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Check executables
       run: |
         ls -l -h
         test -x ./colourise
         test -x ./colour-test
-    - name: Show --help
-      run: |
-        ./colourise --help
-        ./colour-test --help
+
+    - name: colourise --help
+      run: ./colourise --help
+
+    - name: colour-test --help
+      run: ./colour-test --help

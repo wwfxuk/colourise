@@ -102,17 +102,17 @@ function katana() {
 }
 
 
-if [ -t 1 ]
-then
-    # Colourise if stdout is terminal
-    for ARG in "${@}"
-    do
-        case "${ARG}" in
-            --help)
-                print-help
-                exit
-                ;;
-            --?*)  # 1 or more characters after --
+for ARG in "${@}"
+do
+    case "${ARG}" in
+        --help)
+            print-help
+            exit
+            ;;
+        --?*)  # 1 or more characters after --
+            if [ -t 1 ]
+            then
+                # Colourise if stdout is terminal
                 PARSER_NAME="${ARG#--}"
 
                 # PATH=  to prevent it picking up external binaries
@@ -121,12 +121,13 @@ then
                     break
                 } || echo "Parser function not found: '${PARSER_NAME}'"
                 shift
-                ;;
-        esac
-    done
-else
-    echo 'output not a terminal, just using echo-line'
-fi
+            else
+                echo 'Output is not a terminal, just using echo-line'
+                break
+            fi
+            ;;
+    esac
+done
 
 # IFS=      Prevent stripping leading whitespace
 # read -r   Don't escape incoming backslash printed into piped-in stdout
