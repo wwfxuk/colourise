@@ -46,10 +46,26 @@ jobs:
       run: find /usr/share/terminfo/ -name '*colo*' | sort
 
     - name: Shotgun Log
-      run: |
-        cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
-        export TERM=xterm+256color
-        cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+
+    - name: Katana
+      run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
+
+  test-colourise-docker-pty:
+    name: Test colourise (Pseudo Docker Terminal)
+    runs-on: ubuntu-latest
+    container:
+      image: centos:7
+      options: --tty
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Snoop on term capabilities
+      run: find /usr/share/terminfo/ -name '*colo*' | sort
+
+    - name: Shotgun Log
+      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
     - name: Katana
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
