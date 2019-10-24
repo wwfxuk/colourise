@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  Install:
+    name: Install on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check executables
+      run: |
+        test -x ./colourise
+        test -x ./colour-test
