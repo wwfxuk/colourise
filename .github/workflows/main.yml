@@ -27,7 +27,7 @@ jobs:
       run: ./colour-test --help
 
   test-colourise:
-    name: Test colourise on ${{ matrix.os }}
+    name: Test colourise can on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -48,8 +48,11 @@ jobs:
     - name: Katana
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
+    - name: Snoop on term capabilities
+      run: find /usr/share/terminfo/ -type f
+
   test-colour-test:
-    name: Test colour-test on ${{ matrix.os }}
+    name: Test colour-test can on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
