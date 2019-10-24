@@ -121,7 +121,12 @@ function pretty() {
 }
 
 
-clear
+# Only clear terminal when output is terminal
+if [ -t 1 ]
+then
+  clear
+fi
+
 if [ $# -eq 0 ]
 then
   retro
