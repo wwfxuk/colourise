@@ -42,33 +42,36 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Snoop on term capabilities
-      run: find /usr/share/terminfo/ -name '*colo*' | sort
-
-    - name: Shotgun Log
+    - name: Shotgun Log (No Terminal)
       run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
-    - name: Katana
+    - name: Katana (No Terminal)
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
   test-colourise-docker-pty:
     name: Test colourise (Pseudo Docker Terminal)
     runs-on: ubuntu-latest
-    container:
-      image: centos:7
-      options: --tty
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Snoop on term capabilities
-      run: find /usr/share/terminfo/ -name '*colo*' | sort
-
     - name: Shotgun Log
-      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c 'cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log'
 
     - name: Katana
-      run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c './tests/resources/bin/katana | ./colourise --katana'
 
   test-colour-test:
     name: Test colour-test can on ${{ matrix.os }}
