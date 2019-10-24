@@ -33,6 +33,11 @@ jobs:
       matrix:
         # os: [ubuntu-latest, windows-latest, macOS-latest]
         os: [ubuntu-latest, macOS-latest]
+        include:
+            - os: ubuntu-latest
+              piping: "|&"
+            - os: macOS-latest
+              piping: "2>&1 |"
 
     steps:
     - uses: actions/checkout@v1
@@ -41,4 +46,33 @@ jobs:
       run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
     - name: Katana
-      run: ./tests/resources/bin/katana |& ./colourise --katana
+      run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
+
+  test-colour-test:
+    name: Test colour-test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: All
+      run: ./colour-test
+
+    - name: One at at time
+      run: |
+        ./colour-test --retro
+        ./colour-test --combo
+        ./colour-test --pretty
+        ./colour-test -1
+        ./colour-test -2
+        ./colour-test -3
+
+    - name: Multiple in different order
+      run: |
+        ./colour-test -2 --retro
+        ./colour-test --retro --3
+        ./colour-test -3 -2
