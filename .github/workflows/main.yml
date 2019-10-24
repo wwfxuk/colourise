@@ -25,3 +25,20 @@ jobs:
 
     - name: colour-test --help
       run: ./colour-test --help
+
+  test-colourise:
+    name: Test colourise on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Shotgun Log
+      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+
+    - name: Katana
+      run: ./tests/resources/bin/katana |& ./colourise --katana
