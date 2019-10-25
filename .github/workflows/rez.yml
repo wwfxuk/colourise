@@ -9,17 +9,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+        # os: [ubuntu-latest, macOS-latest, windows-latest]
         include:
           - os: ubuntu-latest
             piping: "|&"
             bin-folder: "bin"
-          - os: windows-latest
-            piping: "|&"
-            bin-folder: "Scripts"
           - os: macOS-latest
             piping: "2>&1 |"
             bin-folder: "bin"
+          # - os: windows-latest
+          #   piping: "|&"
+          #   bin-folder: "Scripts"
 
     steps:
     - uses: actions/checkout@v1
