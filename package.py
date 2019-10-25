@@ -36,6 +36,7 @@ tools = ['colourise', 'colour-test']  # Names of executables from this package
 # # Technically needs tar, gzip and curl but they tend to come with OS
 # build_requires = []  # Build-time packages required by this package
 
+# To Do: Fails on Windows, rez will run build_command with cmd
 build_command = r'''
 set -euf -o pipefail
 
