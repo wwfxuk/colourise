@@ -1,0 +1,59 @@
+2019-10-24 14:19:59,183 [tk-desktop.DEBUG] Registering tk-desktop logger.
+2019-10-24 14:19:59,190 [tk-desktop.bootstrap.INFO] ------------------ Desktop Application Bootstrap ------------------
+2019-10-24 14:19:59,191 [tk-desktop.bootstrap.DEBUG] Bootstrap version v1.5.4
+2019-10-24 14:19:59,206 [tk-desktop.startup.INFO] ------------------ Desktop Engine Startup ------------------
+2019-10-24 14:19:59,206 [tk-desktop.startup.INFO] Logging PYTHON state:
+2019-10-24 14:19:59,206 [tk-desktop.startup.INFO] sys.path=['^_^']
+2019-10-24 14:19:59,207 [tk-desktop.startup.INFO] PYTHONHOME=None
+2019-10-24 14:19:59,207 [tk-desktop.startup.INFO] PYTHONPATH=None
+2019-10-24 14:19:59,207 [tk-desktop.startup.INFO] SGTK_DESKTOP_ORIGINAL_PYTHONPATH=/weeeeeeeeee/eeeeeeeeeeeeeeeeeeeee/eeeee/eeeee/eeee
+2019-10-24 14:19:59,207 [tk-desktop.startup.INFO] SGTK_DESKTOP_ORIGINAL_PYTHONHOME=None
+2019-10-24 14:20:03,657 [25236 DEBUG sgtk.stopwatch.tank.descriptor.io_descriptor.appstore] __create_sg_app_store_connection: 0.921041s
+2019-10-24 14:20:03,658 [25236 DEBUG sgtk.core.descriptor.io_descriptor.appstore] ...connection established: <tank_vendor.shotgun_api3.shotgun.Shotgun object at 0x7f1347cbca50>
+2019-10-24 14:20:03,676 [25236 INFO sgtk.ext.shotgun_desktop.upgrade_startup] Getting Shotgun Desktop updates...
+2019-10-24 14:20:03,677 [25236 DEBUG sgtk.core.descriptor.io_descriptor.appstore] Determining latest version for <IODescriptorAppStore sgtk:descriptor:app_store?name=tk-framework-desktopstartup&version=v1.10.5> given constraint pattern None
+2019-10-24 14:20:03,677 [25236 DEBUG sgtk.stopwatch.tank.descriptor.io_descriptor.appstore] __create_sg_app_store_connection: 0.000015s
+2019-10-24 14:20:04,082 [25236 DEBUG sgtk.core.descriptor.io_descriptor.appstore] Downloaded data for 1 versions from Shotgun.
+2019-10-24 14:20:11,636 [25236 DEBUG sgtk.core.bootstrap.manager] <TkManager  User jager
+ Bundle cache fallback paths []
+ Caching policy 0
+ Plugin id None
+ Config is None
+ Base None > instantiated
+2019-10-24 14:20:11,640 [25236 DEBUG sgtk.core.bootstrap.resolver] Requesting pipeline configurations from Shotgun...
+2019-10-24 14:20:11,644 [25236 DEBUG sgtk.core.bootstrap.resolver] Retrieving the pipeline configuration list:
+2019-10-24 14:20:11,650 [25236 DEBUG sgtk.core.bootstrap.resolver] [{'filter_operator': 'any',
+  'filters': [['project', 'is', {'id': 121, 'type': 'Project'}],
+              ['project', 'is', None]]},
+ {'filter_operator': 'any',
+  'filters': [['users.HumanUser.login', 'is', 'jager'],
+              ['users', 'is', None]]}]
+2019-10-24 14:20:13,207 [25236 WARN sgtk.ext.tkimp06336244448312903867d74d07d0f0a23.tk_desktop.site_communication] [PROXY] Loading '/home/jager/.shotgun/wall_maria/authentication.yml'
+2019-10-24 14:20:13,216 [25236 WARN sgtk.ext.tkimp06336244448312903867d74d07d0f0a23.tk_desktop.site_communication] [PROXY] Session data was already up to date.
+2019-10-24 14:20:13,222 [25236 DEBUG sgtk.ext.tkimp06336244448312903867d74d07d0f0a23.tk_desktop.site_communication] [PROXY] <TkManager  User jager
+ Bundle cache fallback paths []
+ Caching policy 0
+ Plugin id None
+ Config is None
+ Base None > instantiated
+ 2019-10-24 14:21:10,701 [25236 ERROR sgtk.ext.tkimp06336244448312903867d74d07d0f0a23.tk_desktop.site_communication] Unexpected error when logging proxy message:
+Traceback (most recent call last):
+  File "/paradise_island/wall_maria/shotgun_desktop/Resources/Python/bundle_cache/app_store/tk-desktop/v2.4.12/python/tk_desktop/site_communication.py", line 76, in _proxy_log
+    logger.log(level, "[PROXY] %s" % msg, *args)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 1231, in log
+    self._log(level, msg, args, **kwargs)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 1286, in _log
+    self.handle(record)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 1296, in handle
+    self.callHandlers(record)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 1336, in callHandlers
+    hdlr.handle(record)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 759, in handle
+    self.emit(record)
+  File "/paradise_island/wall_maria/shotgun_desktop/Resources/Python/bundle_cache/app_store/tk-desktop/v2.4.12/python/tk_desktop/console.py", line 49, in emit
+    message = self.__formatter.format(record)
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 465, in format
+    record.message = record.getMessage()
+  File "/paradise_island/wall_maria/shotgun_desktop/Python/lib/python2.7/logging/__init__.py", line 329, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting

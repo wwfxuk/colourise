@@ -1,0 +1,103 @@
+name: CI
+
+on: [push]
+
+jobs:
+  Install:
+    name: Install in ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Check executables
+      run: |
+        ls -l -h
+        test -x ./colourise
+        test -x ./colour-test
+
+    - name: colourise --help
+      run: ./colourise --help
+
+    - name: colour-test --help
+      run: ./colour-test --help
+
+  test-colourise:
+    name: Can colourise in ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+        include:
+            - os: ubuntu-latest
+              piping: "|&"
+            - os: macOS-latest
+              piping: "2>&1 |"
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Shotgun Log (No Terminal)
+      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+
+    - name: Katana (No Terminal)
+      run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
+
+  test-colourise-docker-pty:
+    name: Can colourise in Pseudo Docker Terminal
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Shotgun Log
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c 'cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log'
+
+    - name: Katana
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c './tests/resources/bin/katana |& ./colourise --katana'
+
+  test-colour-test:
+    name: Can colour-test in ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: All
+      run: ./colour-test
+
+    - name: One at at time
+      run: |
+        ./colour-test --retro
+        ./colour-test --combo
+        ./colour-test --pretty
+        ./colour-test -1
+        ./colour-test -2
+        ./colour-test -3
+
+    - name: Multiple in different order
+      run: |
+        ./colour-test -2 --retro
+        ./colour-test --retro --3
+        ./colour-test -3 -2

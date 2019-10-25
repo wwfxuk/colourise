@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# A script to imitate Katana stderr output
+#
+set -euf -o pipefail
+
+cat >&2 << EOF
+[INFO LicenseCheck]: Interactive License OK
+[INFO python.Main]: Launching Katana 3.1v2 ...
+[INFO python.PyUtilModule.ResourceFiles]: Additional Katana resource paths from KATANA_RESOURCES:
+[INFO python.PyUtilModule.ResourceFiles]:   /wow/vendor/deadline/wee/integrations/Katana
+[INFO python.PyUtilModule.ResourceFiles]:   /Volumes/BIT_CONNEEEEEEEECCCCCCCCCCCCTTTTTT
+[INFO python.PyUtilModule.ResourceFiles]:   /WHAT/am/I/gonna/DO
+[INFO python.PyUtilModule.ResourceFiles]:   /hey/hey/hey/hey
+[INFO python.Main]: KATANA_RENDER_TILE_SIZE defaulting to 256x256
+[INFO python.Main]: KATANA_IMAGE_MEMORY defaulting to 45099 MB
+[INFO python.Main]: KATANA_IMAGE_DISK_MEMORY defaulting to 76097 MB
+[INFO python.Main]: KATANA_SPEC_CACHE_ENABLED defaulting to 1
+Fontconfig warning: "/katana/python/UI4/Resources/Fonts/fonts.conf", line 63: unknown element "blank"
+Fontconfig warning: "/katana/bin/python/UI4/Resources/Fonts/fonts.conf", line 63: unknown element "blank"
+[INFO python.conductor]: Changed log level to INFO
+/conductor/lib/lsseq/seqLister.py: inconsistent use of tabs and spaces in indentation
+[INFO python.__plugins12__.OhSHereWeGoAgain]: Katana is not started from Shotgun.
+[INFO python.__plugins12__.OhSHereWeGoAgain]: No Shotgun folders found. Only loading CJ tabs
+[INFO python.root]: root logger says Hi
+[WARN python.root]: root logger does not like you
+[ERROR python.root]: root logger reported you to the Police
+[FATAL python.root]: root logger is now the President of the United Earth Sphere
+[FATAL python.root]: root logger launched 1000 nukes at the world
+EOF

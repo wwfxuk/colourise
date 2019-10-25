@@ -1,6 +1,10 @@
 # Colourise Terminal Output
 
+[![CI Workflow Badge](https://github.com/wwfxuk/colourise/workflows/CI/badge.svg)](https://github.com/wwfxuk/colourise/actions?workflow=CI)
+
 Colourise `stdin` using a specific parser.
+
+![image](https://user-images.githubusercontent.com/9294702/67519211-49817f80-f69e-11e9-8031-6ff3cfe97eb1.png)
 
 ```bash
 colourise [--shotgun-log|--katana]
@@ -45,6 +49,8 @@ Use `colour-test` to check your current Terminal's 4-8 bit colour/styles
 capabilities. Install in the same way as `colourise`.
 
 If no arguments are given, all tests will be output.
+
+![colour-test](https://user-images.githubusercontent.com/9294702/67518594-01159200-f69d-11e9-996f-93c8efee80a7.gif)
 
 Usage: `colour-test [-1] [-2] [-3]`
 
