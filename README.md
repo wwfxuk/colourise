@@ -1,6 +1,7 @@
 # Colourise Terminal Output
 
 [![CI Workflow Badge](https://github.com/wwfxuk/colourise/workflows/CI/badge.svg)](https://github.com/wwfxuk/colourise/actions?workflow=CI)
+[![Rez Workflow Badge](https://github.com/wwfxuk/colourise/workflows/Rez/badge.svg)](https://github.com/wwfxuk/colourise/actions?workflow=Rez)
 
 Colourise `stdin` using a specific parser.
 
@@ -36,11 +37,20 @@ katana |& colourise --katana
 
 1. Download the `colourise` file
 1. Make it executable e.g. `chmod a+x colourise`
-1. Start using it! e.g. `katana |& /full/path/to/colourise`
+1. Start using it! e.g. on Linux `katana |& /full/path/to/colourise --katana`
 
 Top tip: add the the folder where you downloaded `colourise` script to the
 `PATH` environment variable. Or just copy `colourise` to an existing folder
 on `PATH` e.g. `/usr/local/bin`
+
+### rez package
+
+You can also install this a a [rez package](https://github.com/nerdvegas/rez)
+
+1. Download or `git clone` this repository
+1. From the extracted repository root, run `rez build --install`
+1. Start using the `colourise` package e.g. on Mac OSX
+   `katana 2>&1 | rez env colourise -- colourise --katana`
 
 
 ## Bonus script: colour-test
