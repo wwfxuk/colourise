@@ -9,12 +9,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
         include:
-            - os: ubuntu-latest
-              piping: "|&"
-            - os: macOS-latest
-              piping: "2>&1 |"
+          - os: ubuntu-latest
+            piping: "|&"
+            bin-folder: "bin"
+          - os: windows-latest
+            piping: "|&"
+            bin-folder: "Scripts"
+          - os: macOS-latest
+            piping: "2>&1 |"
+            bin-folder: "bin"
 
     steps:
     - uses: actions/checkout@v1
@@ -26,11 +31,11 @@ jobs:
     - name: Install rez and rez build --install
       shell: bash
       run: |
-        set -x
+        set -x -o pipefail
         # Setup latest rez and paths (master branch)
         git clone "https://github.com/nerdvegas/rez.git" .rez
-        python2 -m pip install --user .rez
-        export PATH="${HOME}/.local/bin:${PATH}"
+        python .rez/install.py _rez
+        export PATH="$(pwd)/_rez/${{ matrix.bin-folder }}/rez:${PATH}"
         rez bind platform
         mkdir -vp "$(rez config local_packages_path)"
         # Test install i.e. package.py

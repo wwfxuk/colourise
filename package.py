@@ -11,8 +11,8 @@ description = (
 
 authors = ['WWFX UK']
 
-# Technically needs bash. Tested rez on Linux and OSX CI with bash
-requires = ['platform-linux|osx']
+# # Technically needs bash. Tested rez on Windows, Linux and OSX CI with bash
+# requires = []
 
 tools = ['colourise', 'colour-test']  # Names of executables from this package
 # ---- OR ----
