@@ -23,7 +23,7 @@ jobs:
       run: |
         set -x
         pushd $(mktemp -d)
-        git clone https://github.com/nerdvegas/rez.git .
+        git clone "https://github.com/nerdvegas/rez.git" .
         python install.py
         export PATH="${PATH}:/opt/rez/bin/rez"
         mkdir -vp "$(rez config local_packages_path)"
@@ -31,3 +31,7 @@ jobs:
         popd
         rez build --install
         rez view colourise
+        rez env colourise -c '
+          colour-test --help &&
+          colourise --help &&
+          ls -l $REZ_COLOURISE_ROOT'

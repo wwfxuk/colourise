@@ -11,7 +11,8 @@ description = (
 
 authors = ['WWFX UK']
 
-requires = ['platform-linux|osx']  # As tested by CI
+# # Technically needs bash. Tested on CI Windows, Linux and OSX with bash
+# requires = []
 
 tools = ['colourise', 'colour-test']  # Names of executables from this package
 # ---- OR ----
@@ -49,8 +50,8 @@ then
     curl $CURL_FLAGS \
         https://github.com/wwfxuk/colourise/archive/{version}.tar.gz \
     | tar -C "$REZ_BUILD_INSTALL_PATH" --strip-components=1 -xz \
-        colourise \
-        colour-test
+        "*/colourise" \
+        "*/colour-test"
 fi
 '''.format(version=version)
 
