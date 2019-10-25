@@ -26,7 +26,7 @@ jobs:
         git clone https://github.com/nerdvegas/rez.git .
         python install.py
         export PATH="${PATH}:/opt/rez/bin/rez"
-        mkdir -vp "$(rez config packages_path)"
+        mkdir -vp "$(rez config local_packages_path)"
         popd
         rez build --install
         rez view colourise
