@@ -12,6 +12,7 @@ jobs:
     name: Can Install in rez
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
@@ -30,8 +31,8 @@ jobs:
         python2 -m pip install --target="_rez" .rez
         ls -l _rez/bin
         export PATH="$(pwd)/_rez/bin:${PATH}"
+        rez bind rez
         mkdir -vp "$(rez config local_packages_path)"
-        rez bind platform
         rez build --install
         rez view colourise
         rez env colourise -c '
