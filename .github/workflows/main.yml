@@ -13,22 +13,24 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
 
     - name: Check executables
+      shell: bash
       run: |
         ls -l -h
         test -x ./colourise
         test -x ./colour-test
 
     - name: colourise --help
+      shell: bash
       run: ./colourise --help
 
     - name: colour-test --help
+      shell: bash
       run: ./colour-test --help
 
   test-colourise:
@@ -36,10 +38,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
         include:
             - os: ubuntu-latest
+              piping: "|&"
+            - os: windows-latest
               piping: "|&"
             - os: macOS-latest
               piping: "2>&1 |"
@@ -48,9 +51,11 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Shotgun Log (No Terminal)
+      shell: bash
       run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
     - name: Katana (No Terminal)
+      shell: bash
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
   test-colourise-docker-pty:
@@ -83,16 +88,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
 
     - name: All
+      shell: bash
       run: ./colour-test
 
     - name: One at at time
+      shell: bash
       run: |
         ./colour-test --retro
         ./colour-test --combo
@@ -102,6 +108,7 @@ jobs:
         ./colour-test -3
 
     - name: Multiple in different order
+      shell: bash
       run: |
         ./colour-test -2 --retro
         ./colour-test --retro --3
