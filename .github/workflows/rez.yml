@@ -28,6 +28,7 @@ jobs:
         set -x
         git clone "https://github.com/nerdvegas/rez.git" .rez
         python2 -m pip install --target="_rez" .rez
+        ls -l _rez/bin
         export PATH="$(pwd)/_rez/bin:${PATH}"
         mkdir -vp "$(rez config local_packages_path)"
         rez bind platform
