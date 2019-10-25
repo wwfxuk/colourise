@@ -50,10 +50,9 @@ then
     curl $CURL_FLAGS \
         https://github.com/wwfxuk/colourise/archive/{version}.tar.gz \
     | tar -C "$REZ_BUILD_INSTALL_PATH" --strip-components=1 -xz \
-        "*/colourise" \
-        "*/colour-test"
+        --wildcards {tools}
 fi
-'''.format(version=version)
+'''.format(version=version, tools=' '.join('"*/{0}"'.format(t) for t in tools))
 
 
 def commands():

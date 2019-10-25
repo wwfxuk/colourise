@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -22,13 +22,11 @@ jobs:
       shell: bash
       run: |
         set -x
-        pushd $(mktemp -d)
-        git clone "https://github.com/nerdvegas/rez.git" .
-        python install.py
-        export PATH="${PATH}:/opt/rez/bin/rez"
+        git clone "https://github.com/nerdvegas/rez.git" .rez
+        python2 -m pip install --target "_rez" .rez
+        export PATH="$(pwd)/_rez/bin:${PATH}"
         mkdir -vp "$(rez config local_packages_path)"
         rez bind platform
-        popd
         rez build --install
         rez view colourise
         rez env colourise -c '
