@@ -11,8 +11,8 @@ description = (
 
 authors = ['WWFX UK']
 
-# # Technically needs bash. Tested on CI Windows, Linux and OSX with bash
-# requires = []
+# Technically needs bash. Tested rez on Linux and OSX CI with bash
+requires = ['platform-linux|osx']
 
 tools = ['colourise', 'colour-test']  # Names of executables from this package
 # ---- OR ----
@@ -45,12 +45,14 @@ set -euf -o pipefail
 [ -t 1 ] && CURL_FLAGS="-#" || CURL_FLAGS="-sS"
 CURL_FLAGS+=" -L"
 
+TAR_FLAGS="--strip-components=1 -xz"
+[ "$REZ_PLATFORM_VERSION" == "osx" ] || TAR_FLAGS+=" --wildcards"
+
 if [[ $REZ_BUILD_INSTALL -eq 1 ]]
 then
     curl $CURL_FLAGS \
         https://github.com/wwfxuk/colourise/archive/{version}.tar.gz \
-    | tar -C "$REZ_BUILD_INSTALL_PATH" --strip-components=1 -xz \
-        --wildcards {tools}
+    | tar -C "$REZ_BUILD_INSTALL_PATH" $TAR_FLAGS {tools}
 fi
 '''.format(version=version, tools=' '.join('"*/{0}"'.format(t) for t in tools))
 
