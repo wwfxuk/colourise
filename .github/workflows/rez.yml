@@ -2,57 +2,29 @@ name: Rez package
 
 on:
   push:
-    branches-ignore:
-      - '**'
-    tags:
-      - '**'
+    branches-ignore: []
+    #   - '**'
+    # tags:
+    #   - '**'
 
 jobs:
-
-  test-colourise:
-    name: Can colourise in ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  install-rez:
+    name: Can Install in rez
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest, macOS-latest]
-        include:
-            - os: ubuntu-latest
-              piping: "|&"
-            - os: macOS-latest
-              piping: "2>&1 |"
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Shotgun Log (No Terminal)
-      run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
-
-    - name: Katana (No Terminal)
-      run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
-
-  test-colourise-docker-pty:
-    name: Can colourise in Pseudo Docker Terminal
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v1
-
-    - name: Shotgun Log
+    - name: Install rez and rez build --install
+      shell: bash
       run: |
-        docker run \
-          --rm \
-          --tty \
-          -v $(pwd):/usr/local/bin:ro \
-          -w /usr/local/bin centos:7 \
-          bash -c 'cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log'
-
-    - name: Katana
-      run: |
-        docker run \
-          --rm \
-          --tty \
-          -v $(pwd):/usr/local/bin:ro \
-          -w /usr/local/bin centos:7 \
-          bash -c './tests/resources/bin/katana |& ./colourise --katana'
-
+        pushd $(mktemp -d)
+        git clone https://github.com/nerdvegas/rez.git .
+        python install.py
+        export PATH="${PATH}:/opt/rez/bin/rez"
+        mkdir -vp "$(rez config packages_path)"
+        popd
+        rez build --install
+        rez view colourise

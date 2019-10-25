@@ -45,8 +45,7 @@ jobs:
             - os: windows-latest
               piping: "|&"
             - os: macOS-latest
-              piping: "|&"
-              # piping: "2>&1 |"
+              piping: "2>&1 |"
 
     steps:
     - uses: actions/checkout@v1
