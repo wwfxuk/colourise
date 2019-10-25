@@ -2,7 +2,7 @@
 
 name = 'colourise'
 
-version = '0.2.0'
+version = '0.3.0'
 
 description = (
     'If output to Terminal, colourise the piped input '
@@ -25,10 +25,9 @@ tools = ['colourise', 'colour-test']  # Names of executables from this package
 #     """
 #     import os
 #     exe_names = []
-#     bin_folder = os.path.join(this.root, 'bin')
 #
-#     for name in os.listdir(bin_folder):
-#         full_path = os.path.join(bin_folder, name)
+#     for name in os.listdir(this.root):
+#         full_path = os.path.join(this.root, name)
 #         if os.access(full_path, os.X_OK) and not os.path.isdir(full_path):
 #             exe_names.append(name)
 #
@@ -40,21 +39,14 @@ tools = ['colourise', 'colour-test']  # Names of executables from this package
 build_command = r'''
 set -euf -o pipefail
 
-# ---- Setup for: curl $CURL_FLAGS ... ----
-# Silent/no progress bar curl if not terminal (e.g. CI stdout or file logs)
-[ -t 1 ] && CURL_FLAGS="-#" || CURL_FLAGS="-sS"
-CURL_FLAGS+=" -L"
-
-TAR_FLAGS="--strip-components=1 -xz"
-[ "$REZ_PLATFORM_VERSION" == "osx" ] || TAR_FLAGS+=" --wildcards"
-
 if [[ $REZ_BUILD_INSTALL -eq 1 ]]
 then
-    curl $CURL_FLAGS \
-        https://github.com/wwfxuk/colourise/archive/{version}.tar.gz \
-    | tar -C "$REZ_BUILD_INSTALL_PATH" $TAR_FLAGS {tools}
+    cp -v \
+        $REZ_BUILD_SOURCE_PATH/colourise \
+        $REZ_BUILD_SOURCE_PATH/colour-test \
+        $REZ_BUILD_INSTALL_PATH
 fi
-'''.format(version=version, tools=' '.join('"*/{0}"'.format(t) for t in tools))
+'''
 
 
 def commands():

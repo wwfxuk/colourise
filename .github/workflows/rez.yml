@@ -1,20 +1,20 @@
-name: Rez package
+name: Rez
 
-on:
-  push:
-    branches-ignore: []
-    #   - '**'
-    # tags:
-    #   - '**'
+on: [push]
 
 jobs:
   install-rez:
-    name: Can Install in rez
+    name: Can install in rez on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-latest]
+        include:
+            - os: ubuntu-latest
+              piping: "|&"
+            - os: macOS-latest
+              piping: "2>&1 |"
 
     steps:
     - uses: actions/checkout@v1
@@ -27,14 +27,19 @@ jobs:
       shell: bash
       run: |
         set -x
+        # Setup latest rez and paths (master branch)
         git clone "https://github.com/nerdvegas/rez.git" .rez
         python2 -m pip install --user .rez
         export PATH="${HOME}/.local/bin:${PATH}"
         rez bind platform
         mkdir -vp "$(rez config local_packages_path)"
+        # Test install i.e. package.py
         rez build --install
         rez view colourise
         rez env colourise -c '
           colour-test --help &&
           colourise --help &&
           ls -l $REZ_COLOURISE_ROOT'
+        # Test main CI tests like in README.md
+        cat ./tests/resources/logs/tk-desktop.log | rez env colourise -- colourise --shotgun-log
+        ./tests/resources/bin/katana ${{ matrix.piping }} rez env colourise -- colourise --katana
