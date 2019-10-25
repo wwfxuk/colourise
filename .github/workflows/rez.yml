@@ -28,10 +28,9 @@ jobs:
       run: |
         set -x
         git clone "https://github.com/nerdvegas/rez.git" .rez
-        python2 -m pip install --target="_rez" .rez
-        ls -l _rez/bin
-        export PATH="$(pwd)/_rez/bin:${PATH}"
-        rez bind rez
+        python2 -m pip install --user .rez
+        export PATH="${HOME}/.local/bin:${PATH}"
+        rez bind platform
         mkdir -vp "$(rez config local_packages_path)"
         rez build --install
         rez view colourise
