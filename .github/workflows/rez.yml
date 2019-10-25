@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -27,6 +27,7 @@ jobs:
         python install.py
         export PATH="${PATH}:/opt/rez/bin/rez"
         mkdir -vp "$(rez config local_packages_path)"
+        rez bind platform
         popd
         rez build --install
         rez view colourise
