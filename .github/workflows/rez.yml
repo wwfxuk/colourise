@@ -10,6 +10,7 @@ on:
 jobs:
   install-rez:
     name: Can Install in rez
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
@@ -20,6 +21,7 @@ jobs:
     - name: Install rez and rez build --install
       shell: bash
       run: |
+        set -x
         pushd $(mktemp -d)
         git clone https://github.com/nerdvegas/rez.git .
         python install.py
