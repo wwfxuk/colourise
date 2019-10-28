@@ -37,10 +37,13 @@ jobs:
         include:
             - os: ubuntu-latest
               piping: "|&"
+              ping-style: "linux"
             - os: windows-latest
               piping: "|&"
+              ping-style: "windows"
             - os: macOS-latest
               piping: "2>&1 |"
+              ping-style: "linux"
 
     steps:
     - uses: actions/checkout@v1
@@ -48,6 +51,10 @@ jobs:
     - name: Shotgun Log (No Terminal)
       shell: bash
       run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
+
+    - name: Ping (No Terminal)
+      shell: bash
+      run: cat ./tests/resources/logs/ping-${{ matrix.ping-style }}.log | ./colourise --ping
 
     - name: Katana (No Terminal)
       shell: bash
@@ -68,6 +75,16 @@ jobs:
           -v $(pwd):/usr/local/bin:ro \
           -w /usr/local/bin centos:7 \
           bash -c 'cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log'
+
+    - name: Ping
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c 'cat ./tests/resources/logs/ping-linux.log | ./colourise --ping'
+          bash -c 'cat ./tests/resources/logs/ping-windows.log | ./colourise --ping'
 
     - name: Katana
       run: |

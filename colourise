@@ -71,6 +71,32 @@ function shotgun-log() {
 }
 
 
+function ping() {
+    allOFF='\e[0m'
+    black_fg='\e[30m'
+    black_bg='\e[40m'
+    red_bg='\e[41m'
+    green_bg='\e[42m'
+    yellow_bg='\e[43m'
+    yellow_fg='\e[33m'
+
+    # Will actually modify "global" variables
+    START="${allOFF}"
+    END="${allOFF}"
+
+    MS=$(echo "${LINE}" | sed -E -e s/'.*time=([0-9]+).*'/'\1'/)
+    if [[ ${MS} == ?(-)+([0-9]) ]]
+    then
+        LINE=$(printf "%5s  " "${MS}")   # Comment this line out for full $LINE
+        (( MS > 499 )) && START="${black_bg}${yellow_fg}"
+        (( MS < 500 )) && START="${red_bg}"
+        (( MS < 200 )) && START="${black_fg}${yellow_bg}"
+        (( MS <  90 )) && START="${black_fg}${green_bg}"
+    fi
+    echo-line
+}
+
+
 function katana() {
     allOFF='\e[0m'
     red_bg='\e[41m'

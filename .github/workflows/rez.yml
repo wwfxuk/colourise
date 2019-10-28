@@ -48,4 +48,6 @@ jobs:
           ls -l $REZ_COLOURISE_ROOT'
         # Test main CI tests like in README.md
         cat ./tests/resources/logs/tk-desktop.log | rez env colourise -- colourise --shotgun-log
+        cat ./tests/resources/logs/ping-linux.log | rez env colourise -- colourise --ping
+        cat ./tests/resources/logs/ping-windows.log | rez env colourise -- colourise --ping
         ./tests/resources/bin/katana ${{ matrix.piping }} rez env colourise -- colourise --katana
