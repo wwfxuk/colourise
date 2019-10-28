@@ -9,6 +9,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        include:
+        - os: macOS-latest
+          source: "set -x; source "
 
     steps:
     - uses: actions/checkout@v1
@@ -22,7 +25,7 @@ jobs:
 
     - name: colourise --help
       shell: bash
-      run: ./colourise --help
+      run: ${{ matrix.source }}./colourise --help
 
     - name: colour-test --help
       shell: bash
@@ -35,15 +38,15 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         include:
-            - os: ubuntu-latest
-              piping: "|&"
-              ping-style: "linux"
-            - os: windows-latest
-              piping: "|&"
-              ping-style: "windows"
-            - os: macOS-latest
-              piping: "2>&1 |"
-              ping-style: "linux"
+        - os: ubuntu-latest
+          piping: "|&"
+          ping-style: "linux"
+        - os: windows-latest
+          piping: "|&"
+          ping-style: "windows"
+        - os: macOS-latest
+          piping: "2>&1 |"
+          ping-style: "linux"
 
     steps:
     - uses: actions/checkout@v1

@@ -84,7 +84,6 @@ function ping() {
     START="${allOFF}"
     END="${allOFF}"
 
-    set -x
     MS=$(echo "${LINE}" | sed -E -e s/'.*time=([0-9]+).*'/'\1'/)
     if [[ ${MS} == ?(-)+([0-9]) ]]
     then
@@ -94,7 +93,6 @@ function ping() {
         (( MS < 200 )) && START="${black_fg}${yellow_bg}"
         (( MS <  90 )) && START="${black_fg}${green_bg}"
     fi
-    set +x
     echo-line
 }
 
