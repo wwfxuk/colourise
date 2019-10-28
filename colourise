@@ -142,7 +142,7 @@ do
                 PARSER_NAME="${ARG#--}"
 
                 # PATH=  to prevent it picking up external binaries
-                PATH= command -v "${PARSER_NAME}" && {
+                PARSER_EXE="$(PATH= command -v ${PARSER_NAME})" && {
                     PARSER="${PARSER_NAME}"
                     break
                 } || echo "Parser function not found: '${PARSER_NAME}'"
