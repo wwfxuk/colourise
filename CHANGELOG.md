@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and
 this project adheres to [Semantic Versioning](https://semver.org).
 
 
+## [0.4.0] - 2019-10-28
+
+Ping and some minor fixes.
+
+### Added
+
+- `--ping` for `colourise`.
+
+
+### Fixed
+
+- Name of parser being printed at startup.
+
+
 ## [0.3.0] - 2019-10-25
 
 Now available as rez package.
