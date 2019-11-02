@@ -29,7 +29,7 @@ jobs:
       run: ./colour-test --help
 
   test-colourise:
-    name: Can colourise in ${{ matrix.os }} (No colour for log)
+    name: No colour for logs in ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -61,7 +61,7 @@ jobs:
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
   test-colourise-docker-pty:
-    name: Can colourise in Terminal (Pseudo Docker)
+    name: Colourise in Terminal (Pseudo Docker)
     runs-on: ubuntu-latest
 
     steps:
@@ -103,19 +103,13 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        include:
-        - os: macOS-latest
-          term-setup: "export TERM=xterm-color"
 
     steps:
     - uses: actions/checkout@v1
 
     - name: All
       shell: bash
-      run: |
-        ${{ matrix.term-setup }}
-        echo "TERM '${TERM:-IS UNSET OR EMPTY}'"
-        ./colour-test
+      run: ./colour-test
 
     - name: One at at time
       shell: bash
