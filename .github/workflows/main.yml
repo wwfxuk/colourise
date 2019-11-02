@@ -83,8 +83,10 @@ jobs:
           --tty \
           -v $(pwd):/usr/local/bin:ro \
           -w /usr/local/bin centos:7 \
-          bash -c 'cat ./tests/resources/logs/ping-linux.log | ./colourise --ping'
-          bash -c 'cat ./tests/resources/logs/ping-windows.log | ./colourise --ping'
+          bash -c 'cat \
+            ./tests/resources/logs/ping-linux.log \
+            ./tests/resources/logs/ping-windows.log | \
+          ./colourise --ping'
 
     - name: Katana
       run: |
@@ -104,6 +106,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Check bash
+      shell: bash
+      run: bash --help
 
     - name: All
       shell: bash
