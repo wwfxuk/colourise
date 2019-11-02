@@ -29,7 +29,7 @@ jobs:
       run: ./colour-test --help
 
   test-colourise:
-    name: Can colourise in ${{ matrix.os }}
+    name: Can colourise in ${{ matrix.os }} (No colour for log)
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -48,20 +48,20 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Shotgun Log (No Terminal)
+    - name: Shotgun Log
       shell: bash
       run: cat ./tests/resources/logs/tk-desktop.log | ./colourise --shotgun-log
 
-    - name: Ping (No Terminal)
+    - name: Ping
       shell: bash
       run: cat ./tests/resources/logs/ping-${{ matrix.ping-style }}.log | ./colourise --ping
 
-    - name: Katana (No Terminal)
+    - name: Katana
       shell: bash
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
   test-colourise-docker-pty:
-    name: Can colourise in Pseudo Docker Terminal
+    name: Can colourise in Terminal (Pseudo Docker)
     runs-on: ubuntu-latest
 
     steps:
@@ -103,13 +103,19 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        include:
+        - os: macOS-latest
+          term-setup: "export TERM=xterm-color"
 
     steps:
     - uses: actions/checkout@v1
 
     - name: All
       shell: bash
-      run: ./colour-test
+      run: |
+        ${{ matrix.term-setup }}
+        echo "TERM '${TERM:-IS UNSET OR EMPTY}'"
+        ./colour-test
 
     - name: One at at time
       shell: bash
