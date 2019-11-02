@@ -9,9 +9,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        include:
-        - os: macOS-latest
-          postfix: -mac
 
     steps:
     - uses: actions/checkout@v1
@@ -25,7 +22,7 @@ jobs:
 
     - name: colourise --help
       shell: bash
-      run: ./colourise${{ matrix.postfix }} --help
+      run: ./colourise --help
 
     - name: colour-test --help
       shell: bash
