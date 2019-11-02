@@ -2,7 +2,7 @@
 
 name = 'colourise'
 
-version = '0.3.0'
+version = '0.4.0'
 
 description = (
     'If output to Terminal, colourise the piped input '

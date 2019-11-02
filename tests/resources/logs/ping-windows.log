@@ -1,0 +1,41 @@
+Ping somwehere.com [123.123.12.12] with 32 bytes of data:
+Reply from 123.123.12.12: bytes=32 time=<1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=<1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=<1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=<1ms ttl=57
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+Reply from 123.123.12.12: bytes=32 time=1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1ms ttl=57
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+Reply from 123.123.12.12: bytes=32 time=12ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=12ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=12ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=12ms ttl=57
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.123.12.12: bytes=32 time=123ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=123ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=123ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=123ms ttl=57
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+Reply from 123.123.12.12: bytes=32 time=234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1234ms ttl=57
+Reply from 123.123.12.12: bytes=32 time=1234ms ttl=57

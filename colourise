@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euf -o pipefail
+shopt -s extglob
 
 
 function print-help() {
@@ -71,6 +72,52 @@ function shotgun-log() {
 }
 
 
+function ping-ms() {
+    local MS
+    MS="${LINE##*time=}"  # Strip time= and anything before it
+    MS="${MS/#<1/0}"      # Convert Windows <1ms to 0ms
+    MS="${MS%%[!0-9]*}"   # Remove decimal/remaining non-digits
+    MS="${MS:-${LINE}}"   # If empty, set to original line
+    echo "${MS}"
+}
+
+function ping() {
+    local MS
+    allOFF='\e[0m'
+    black_fg='\e[30m'
+    black_bg='\e[40m'
+    red_bg='\e[41m'
+    green_bg='\e[42m'
+    yellow_bg='\e[43m'
+    yellow_fg='\e[33m'
+
+    # Will actually modify "global" variables
+    START="${allOFF}"
+    END="${allOFF}"
+
+    MS="$(ping-ms)"
+    case "${MS,,*}" in  # Parse using lowercase version of MS
+        +([0-9]) )
+            # Valid ping ms response
+            printf -v LINE "%5s " "${MS}"  # Comment this line out for full $LINE
+            (( MS > 499 )) && START="${black_bg}${yellow_fg}"
+            (( MS < 500 )) && START="${red_bg}"
+            (( MS < 200 )) && START="${black_fg}${yellow_bg}"
+            (( MS <  90 )) && START="${black_fg}${green_bg}"
+            ;;
+        ping*"bytes of data"* )
+            # Initial ping info message
+            START="${allOFF}"
+            ;;
+        * )
+            # Anything else, i.e. errors
+            START="${black_bg}${yellow_fg}"
+            ;;
+    esac
+    echo-line
+}
+
+
 function katana() {
     allOFF='\e[0m'
     red_bg='\e[41m'
@@ -116,7 +163,7 @@ do
                 PARSER_NAME="${ARG#--}"
 
                 # PATH=  to prevent it picking up external binaries
-                PATH= command -v "${PARSER_NAME}" && {
+                PARSER_EXE="$(PATH= command -v ${PARSER_NAME})" && {
                     PARSER="${PARSER_NAME}"
                     break
                 } || echo "Parser function not found: '${PARSER_NAME}'"
@@ -128,6 +175,9 @@ do
             ;;
     esac
 done
+
+# Enable colour for Mac Terminal explicitly
+[ "${MACHTYPE/darwin/}" == "${MACHTYPE}" ] || export CLICOLOR=1
 
 # IFS=      Prevent stripping leading whitespace
 # read -r   Don't escape incoming backslash printed into piped-in stdout

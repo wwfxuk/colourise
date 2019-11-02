@@ -1,0 +1,41 @@
+PING somwehere.com (123.123.12.12) 56(84) bytes of data.
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=0.123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=0.123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=0.123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=0.123 ms
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+ping: not-sure-where: Name or service not known
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=1.23 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=1.23 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=1.23 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=1.23 ms
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=12.3 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=12.3 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=12.3 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=12.3 ms
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+Reply from 123.12.12.123: Destination host unreachable.
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=123 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=123 ms
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+PING: transmit failed. General failure
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=1 ttl=54 time=1234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=2 ttl=54 time=1234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=3 ttl=54 time=1234 ms
+64 bytes from full-address.somwehere.com (123.123.12.12): icmp_seq=4 ttl=54 time=1234 ms
