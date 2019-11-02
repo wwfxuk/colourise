@@ -3,18 +3,19 @@
 [![CI Workflow Badge](https://github.com/wwfxuk/colourise/workflows/CI/badge.svg)](https://github.com/wwfxuk/colourise/actions?workflow=CI)
 [![Rez Workflow Badge](https://github.com/wwfxuk/colourise/workflows/Rez/badge.svg)](https://github.com/wwfxuk/colourise/actions?workflow=Rez)
 
-Colourise `stdin` using a specific parser.
+Colourise `stdin` using a specific `bash` script parser.
 
-![image](https://user-images.githubusercontent.com/9294702/67519211-49817f80-f69e-11e9-8031-6ff3cfe97eb1.png)
+![image](https://user-images.githubusercontent.com/9294702/68074122-a1e80980-fd8f-11e9-8f14-60dae3d2bf09.png)
 
 ```bash
-colourise [--shotgun-log|--katana]
+colourise [--shotgun-log|--katana|--ping]
 ```
 
 Options         | Description
 ----------------|------------------------------------------
 `--shotgun-log` | Colourise using parser for Shotgun logs.
 `--katana`      | Colourise using parser for Katana stderr.
+`--ping`        | Colourise using parser for ping.
 
 
 ## Examples
@@ -30,10 +31,21 @@ before piping into to `colourise`:
 
 ```bash
 katana |& colourise --katana
+# For Mac's Terminal: katana 2>&1 | colourise --katana
 ```
 
+Colourise continuously a `ping` process, useful when ~~gaming~~ monitoring
+server latency.
+
+> Added in [0.4.0](https://github.com/wwfxuk/colourise/releases/tag/0.4.0)
+
+```bash
+ping www.google.com | colourise --ping
+```
 
 ## Installation
+
+Requires `bash` to be installed.
 
 1. Download the `colourise` file
 1. Make it executable e.g. `chmod a+x colourise`
