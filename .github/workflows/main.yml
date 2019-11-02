@@ -109,7 +109,13 @@ jobs:
 
     - name: Check bash
       shell: bash
-      run: bash --help
+      run: |
+        echo "'${MACHTYPE}'"
+        if [ "${MACHTYPE/darwin/}" != "${MACHTYPE}" ]
+        then
+          echo "on a MAC"
+        fi
+        printf --help || echo
 
     - name: All
       shell: bash
