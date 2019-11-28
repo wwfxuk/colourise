@@ -1,3 +1,6 @@
+# Don't ignore test resources log files
+!/tests/resources/logs/*.log
+
 # IDEs and rez build dir
 /.idea
 /.vscode

@@ -1,0 +1,39 @@
+NukeStudio 11.2v4, 64 bit, built Oct  9 2018.
+Copyright (c) 2018 The Foundry Visionmongers Ltd.  All Rights Reserved.
+libDeckLinkAPI.so: cannot open shared object file: No such file or directory
+Licence expires on: 2019/12/12 (Doing a trial)
+WARNING: My own custom startup script says hi
+INFO 13:14:40.469:Hiero(10776): Processor Registered <class 'some.fancy.processor.MadManProcessor'>
+INFO 13:14:40.469:Hiero(10776): Task Registered <class 'some.fancy.transcode.MadManTranscode'>
+INFO 13:14:40.469:Hiero(10776):   Looking for plugins in /my/home/folder/.nuke/Python/Startup
+INFO 13:14:40.470:Hiero(10776):   Looking for plugins in /path/to/nuke/install/configs/Python/StartupUI
+INFO 13:14:40.470:Hiero(10776):   Looking for plugins in /path/to/shotgun/tk-nuke/v0.12.0/classic_startup/Python/StartupUI
+INFO 13:14:40.470:Hiero(10776):   Looking for plugins in /my/own/tools/hiero/Python/StartupUI
+INFO 13:14:40.470:Hiero(10776):     - Loading module my_tool_ui
+DEBUG 13:14:40.471:Hiero(10776): registerProcessorUI
+DEBUG 13:14:40.471:Hiero(10776): Processor UI Registered <class 'some.fancy.presets.processor.MadManProcessorPreset'> <class 'some.fancy.gui.processor_ui.MadManProcessorUI'>
+DEBUG 13:14:40.472:Hiero(10776): Task UI Registered <class 'some.fancy.presets.transcode.MadManTranscodePreset'> <class 'some.fancy.gui.transcode_ui.MadManTranscodeUI'>
+INFO 13:14:40.472:Hiero(10776):   Looking for plugins in /my/home/folder/.nuke/Python/StartupUI
+INFO 13:14:40.473:Hiero(10776): Searching for startup projects:
+INFO 13:14:40.473:Hiero(10776): Looking for startup projects in: /path/to/nuke/install/configs/StartupProjects/Hiero
+INFO 13:14:40.474:Hiero(10776):  - Opening startup project: /path/to/nuke/install/configs/StartupProjects/Hiero/HieroPresets.hrox
+DEBUG 13:14:40.566:Hiero(10776): nukestudio.startServerIfEnabled
+DEBUG 13:14:40.567:Hiero(10776): nukestudio.startServer
+DEBUG 13:14:40.571:Hiero(10776): add effect handler
+INFO 13:14:41.271:Hiero(10776): Looking for startup projects in: /path/to/shotgun/tk-nuke/v0.12.0/classic_startup/StartupProjects/Hiero
+INFO 13:14:41.271:Hiero(10776): Looking for startup projects in: /my/own/tools/hiero/StartupProjects/Hiero
+INFO 13:14:41.271:Hiero(10776): Looking for startup projects in: /my/home/folder/.nuke/StartupProjects/Hiero
+INFO 13:14:41.272:Hiero(10776):   Looking for plugins in /path/to/nuke/install/configs/Python/Exporters
+INFO 13:14:41.272:Hiero(10776):   Looking for plugins in /path/to/shotgun/tk-nuke/v0.12.0/classic_startup/Python/Exporters
+INFO 13:14:41.272:Hiero(10776):   Looking for plugins in /my/own/tools/hiero/Python/Exporters
+INFO 13:14:41.272:Hiero(10776):   Looking for plugins in /my/home/folder/.nuke/Python/Exporters
+INFO 13:14:41.320:Hiero(10776): Loaded preset : CMX 3600 EDL
+INFO 13:14:41.323:Hiero(10776): Loaded preset : Avid DNxHD Codec MOV
+INFO 13:14:41.327:Hiero(10776): Loaded preset : Apple ProRes 4444 MOV
+INFO 13:14:41.334:Hiero(10776): Loaded preset : Photo - JPEG MOV
+INFO 13:14:41.337:Hiero(10776): Loaded preset : Apple ProRes 422 MOV
+[DEPRECATION WARNING] hiero.core.Project.projectRoot() will be removed in Nuke 12, use exportRootDirectory() instead.
+[DEPRECATION WARNING] hiero.core.Project.setProjectRoot() will be removed in Nuke 12, use setProjectDirectory() or setCustomExportDirectory() instead.
+Disk cache /var/tmp/nuke-u1115001236/ViewerCache/??: 8371MB (82% of 10240MB) used in 1033 files.
+ERROR 13:20:41.783:Hiero(11927): This is an error from hiero.core.log.error
+ERROR 13:20:41.784:Hiero(11927): This is an exception from hiero.core.log.exception

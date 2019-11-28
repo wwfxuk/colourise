@@ -13,7 +13,7 @@ Hiero parser, based off Katana one.
 ### Added
 
 - `--hiero` for `colourise`.
-
+- `gitignore` inclusion rule for `tests/resources/logs/*.log`
 
 ## [0.4.0] - 2019-11-02
 
