@@ -16,6 +16,7 @@ Options         | Description
 `--shotgun-log` | Colourise using parser for Shotgun logs.
 `--katana`      | Colourise using parser for Katana stderr.
 `--ping`        | Colourise using parser for ping.
+`--hiero`       | Colourise using parser for Hiero (`hiero.core.log`).
 
 
 ## Examples

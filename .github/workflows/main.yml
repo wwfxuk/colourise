@@ -60,6 +60,10 @@ jobs:
       shell: bash
       run: ./tests/resources/bin/katana ${{ matrix.piping }} ./colourise --katana
 
+    - name: Hiero
+      shell: bash
+      run: cat ./tests/resources/logs/nuke--hiero.log | ./colourise --hiero
+
   test-colourise-docker-pty:
     name: Colourise in Terminal (Pseudo Docker)
     runs-on: ubuntu-latest
@@ -87,6 +91,17 @@ jobs:
             ./tests/resources/logs/ping-linux.log \
             ./tests/resources/logs/ping-windows.log | \
           ./colourise --ping'
+
+    - name: Hiero
+      run: |
+        docker run \
+          --rm \
+          --tty \
+          -v $(pwd):/usr/local/bin:ro \
+          -w /usr/local/bin centos:7 \
+          bash -c 'cat \
+            ./tests/resources/logs/nuke--hiero.log  | \
+          ./colourise --hiero'
 
     - name: Katana
       run: |
