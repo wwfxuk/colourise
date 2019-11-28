@@ -149,6 +149,37 @@ function katana() {
 }
 
 
+function hiero() {
+    allOFF='\e[0m'
+    red_bg='\e[41m'
+    yellow_fg='\e[33m'
+    blue_fg='\e[34m'
+    grey_fg='\e[90m'
+
+    shopt -s nocasematch
+    END="${allOFF}"
+
+    case "${LINE}" in
+        *warn*)
+            START="${yellow_fg}"
+            ;;
+        *ERROR*|*CRITICAL*|*FATAL*)
+            START="${red_bg}"
+            ;;
+        'DEBUG '*)
+            START="${grey_fg}"  # Python logging specific colouring
+            ;;
+        'INFO '*)
+            START="${blue_fg}"  # Python logging specific colouring
+            ;;
+        *)
+            START="${allOFF}"
+            ;;
+    esac
+    echo-line
+}
+
+
 for ARG in "${@}"
 do
     case "${ARG}" in
