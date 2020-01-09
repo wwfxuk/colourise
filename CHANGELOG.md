@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com), and
 this project adheres to [Semantic Versioning](https://semver.org).
 
 
+## [0.5.1] - 2020-01-09
+
+### Fixed
+
+- `WARNING` not picked up in `shotgun-log`.
+- Missing `--help` docs for `--ping` and `--hiero`.
+
+
 ## [0.5.0] - 2019-11-28
 
 Hiero parser, based off Katana one.

@@ -13,6 +13,8 @@ Colourise stdin using a specific parser.
 Options:
     --shotgun-log       Colourise using parser for shotgun logs.
     --katana            Colourise using parser for Katana stderr.
+    --ping              Colourise using parser for ping.
+    --hiero             Colourise using parser for Hiero (hiero.core.log).
 
 
 Examples:
@@ -55,7 +57,7 @@ function shotgun-log() {
     END="${allOFF}"
 
     case "${LINE}" in
-        *' WARN '*)
+        *' WARN '*|*' WARNING '*)
             START="${yellow_fg}"
             ;;
         *' ERROR '*|*' CRITICAL '*|*' FATAL '*)
